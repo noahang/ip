@@ -1,7 +1,10 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import backend.Task.IllegalStartAndEndDateException;
 import backend.ToDoList;
 import frontend.Format;
 import static frontend.Format.HORIZONTAL_LINE;
@@ -128,6 +131,11 @@ public class SirDuke {
                         System.out.println("Your deadline description is incomplete. " +
                                 "Use the following format: deadline/description/timeToBeCompletedBy");
                         System.out.println(HORIZONTAL_LINE + "\n");
+                    } catch (DateTimeParseException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("Your date does not follow a format I understand." +
+                                "Use the following format: yyyy-mm-dd");
+                        System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;
                 case "event":
@@ -136,7 +144,16 @@ public class SirDuke {
                     } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("Your event description is incomplete. " +
-                                "Use the following format: event/description/startTime/endTime");
+                                " Use the following format: event/description/startTime/endTime");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    } catch (DateTimeParseException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("One or more of your dates do not follow a format I understand." +
+                                " Use the following format: yyyy-mm-dd");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    } catch (IllegalStartAndEndDateException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println(e.toString());
                         System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;

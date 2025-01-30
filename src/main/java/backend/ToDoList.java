@@ -5,9 +5,8 @@ import static frontend.Format.HORIZONTAL_LINE;
 import java.lang.IllegalArgumentException;
 
 /**
- * Creates a new Task and adds it to the toDoList
- * Updates numOfTasks
- * Sets index of this new Task accordingly in the toDoList
+ * Represents a list that serves as the database for the tasks
+ * Prints responses in response to commands as well
  */
 public class ToDoList {
     HashMap<Integer,Task> toDoList = new HashMap<>();
@@ -36,6 +35,13 @@ public class ToDoList {
         System.out.println(HORIZONTAL_LINE + "\n");
     }
 
+    /**
+     * Marks tasks in the list as done
+     * If the task does not exist, informs user that the task does not exist
+     *
+     * @param index the index of the task
+     * which is also the Key of the task in the <code>HashMap toDoList</code>
+     */
     public void markTaskAsDone(int index){
         if (toDoList.get(index) == null) {
             System.out.println("I do not have this task in my list.");

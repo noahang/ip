@@ -1,4 +1,4 @@
-package backend;
+package backend.Task;
 
 /**
  * Represents a task. A <code>Task<code> object has
@@ -16,7 +16,7 @@ public class Task {
      * because we assume the task is not completed at the time of adding to the list
      * @param description name of the task
      */
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -37,6 +37,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Marks a task as done
+     * <p>
+     * Even if the task is not yet done, this method will not throw an exception
+     */
     public void unmarkAsDone() {
         this.isDone = false;
     }

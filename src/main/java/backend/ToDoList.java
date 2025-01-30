@@ -1,15 +1,16 @@
 package backend;
 
+import backend.Task.Task;
+
 import java.util.HashMap;
 import static frontend.Format.HORIZONTAL_LINE;
-import java.lang.IllegalArgumentException;
 
 /**
  * Represents a list that serves as the database for the tasks
  * Prints responses in response to commands as well
  */
 public class ToDoList {
-    HashMap<Integer,Task> toDoList = new HashMap<>();
+    HashMap<Integer, Task> toDoList = new HashMap<>();
 
     /**
      * Creates a new Task and adds it to the toDoList
@@ -57,17 +58,24 @@ public class ToDoList {
         }
     }
 
-        public void unmarkTaskAsDone ( int index){
-            if (toDoList.get(index) == null) {
-                System.out.println(HORIZONTAL_LINE + "\n");
-                System.out.println("I do not have this task in my list.");
-                System.out.println(HORIZONTAL_LINE + "\n");
-            } else {
-                Task task = toDoList.get(index);
-                task.unmarkAsDone();
-                System.out.println(HORIZONTAL_LINE + "\n");
-                System.out.println("Understood, I have unmarked " + task + " as done.");
-                System.out.println(HORIZONTAL_LINE + "\n");
-            }
+    /**
+     * Marks tasks in the list as done
+     * If the task does not exist, informs user that the task does not exist
+     *
+     * @param index the index of the task
+     * which is also the Key of the task in the <code>HashMap toDoList</code>
+     */
+    public void unmarkTaskAsDone ( int index){
+        if (toDoList.get(index) == null) {
+            System.out.println(HORIZONTAL_LINE + "\n");
+            System.out.println("I do not have this task in my list.");
+            System.out.println(HORIZONTAL_LINE + "\n");
+        } else {
+            Task task = toDoList.get(index);
+            task.unmarkAsDone();
+            System.out.println(HORIZONTAL_LINE + "\n");
+            System.out.println("Understood, I have unmarked " + task + " as done.");
+            System.out.println(HORIZONTAL_LINE + "\n");
         }
     }
+}

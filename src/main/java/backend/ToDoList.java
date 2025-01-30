@@ -129,6 +129,13 @@ public class ToDoList {
             System.out.println("I do not have this task in my list.");
             System.out.println(HORIZONTAL_LINE + "\n");
         }
+    }
 
+    @Override public String toString() {
+        StringBuilder temp = new StringBuilder();
+        for (Task task : toDoList) {
+            temp.append(task.toString()).append("\n");
+        }
+        return temp.toString();
     }
 }

@@ -11,6 +11,7 @@ import static frontend.Format.HORIZONTAL_LINE;
 /**
  * Represents a list that serves as the database for the tasks.
  * Prints responses in response to commands as well.
+ * Index starts from O, but will be printed as starting from 1 in showList().
  */
 public class ToDoList {
     ArrayList<Task> toDoList = new ArrayList();
@@ -62,6 +63,7 @@ public class ToDoList {
 
     /**
      * Prints the index and string representation of every task in the toDoList.
+     * Index starts from 0 in ArrayList, but will be printed out as starting from 1.
      */
     public void showList() {
         System.out.println(HORIZONTAL_LINE + "\n");
@@ -78,7 +80,7 @@ public class ToDoList {
      */
     public void markTaskAsDone(int index) {
         try {
-            Task task = toDoList.get(index - 1);
+            Task task = toDoList.get(index);
             task.markAsDone();
             System.out.println(HORIZONTAL_LINE + "\n");
             System.out.println("Well done, I have marked " + task + " as done.");
@@ -98,7 +100,7 @@ public class ToDoList {
      */
     public void unmarkTaskAsDone (int index) {
         try {
-            Task task = toDoList.get(index - 1);
+            Task task = toDoList.get(index);
             task.unmarkAsDone();
             System.out.println(HORIZONTAL_LINE + "\n");
             System.out.println("Understood, I have unmarked " + task + " as done.");
@@ -117,14 +119,14 @@ public class ToDoList {
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
     public void removeTask (int index) {
-        if (toDoList.remove(index - 1) == null) {
+        try {
+            Task task = toDoList.remove(index);
+            System.out.println(HORIZONTAL_LINE + "\n");
+            System.out.println("Very well, I have removed " + task + " .");
+            System.out.println(HORIZONTAL_LINE + "\n");
+        } catch (IndexOutOfBoundsException e) {
             System.out.println(HORIZONTAL_LINE + "\n");
             System.out.println("I do not have this task in my list.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        } else {
-            Task task = toDoList.remove(index - 1);
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("Understood, I have unmarked " + task + " as done.");
             System.out.println(HORIZONTAL_LINE + "\n");
         }
 

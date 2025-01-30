@@ -72,7 +72,7 @@ public class SirDuke {
                     break;
                 case "mark":
                     try {
-                        int index = Integer.parseInt(parsedCommand[1]);
+                        int index = Integer.parseInt(parsedCommand[1]) - 1;
                         list.markTaskAsDone(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
@@ -88,7 +88,7 @@ public class SirDuke {
                     break;
                 case "unmark":
                     try {
-                        int index = Integer.parseInt(parsedCommand[1]);
+                        int index = Integer.parseInt(parsedCommand[1]) - 1;
                         list.unmarkTaskAsDone(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
@@ -131,6 +131,23 @@ public class SirDuke {
                         System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;
+                case "remove":
+                    try {
+                        int index = Integer.parseInt(parsedCommand[1]) - 1;
+                        list.removeTask(index);
+                    } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index." +
+                                "Try the same command with an integer instead.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    } catch (NumberFormatException e) { //index provided after "mark" is not a number
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index. " +
+                                "Try the same command with an integer instead.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
+                    break;
+
                 default:
                     System.out.println(HORIZONTAL_LINE + "\n");
                     System.out.println("I'm afraid I don't understand what you mean.");

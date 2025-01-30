@@ -1,6 +1,8 @@
 package backend.Task;
 
-import backend.Task.Task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with a deadline. A <code>DeadlineTask<code> object has a
@@ -8,21 +10,24 @@ import backend.Task.Task;
  */
 public class DeadlineTask extends Task {
 
-    protected String toBeCompletedBy;
+    protected LocalDate toBeCompletedBy;
 
     /**
      * Constructor for an Event object
      *
      * @param description name of the task
      * @param toBeCompletedBy the time that the task must be completed by
+     *
+     * @throws DateTimeParseException if string is in an invalid format
      */
-    public DeadlineTask(String description, String toBeCompletedBy) {
+    public DeadlineTask(String description, String toBeCompletedBy) throws DateTimeParseException{
         super(description);
-        this.toBeCompletedBy = toBeCompletedBy;
+        this.toBeCompletedBy = LocalDate.parse(toBeCompletedBy);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.toBeCompletedBy + ")";
+        return "[D]" + super.toString() + " (by: "
+                + toBeCompletedBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

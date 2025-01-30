@@ -4,6 +4,9 @@ import frontend.Format;
 
 import static frontend.Format.HORIZONTAL_LINE;
 
+/**
+ * Class that represents a chatbot
+ */
 public class SirDuke {
     
     /**
@@ -20,6 +23,30 @@ public class SirDuke {
      * Prints welcome message and allows the SirDuke chatbot to start receiving commands
      * Reads user input from console and interprets them as commands
      * Executes commands accordingly
+     *<p>
+     *     Using the chatbot:
+     *     - To view the list, use the following command:
+     *     list
+     *
+     *      - To add a To Do to the list, use the following format:
+     *     deadline/description
+     *
+     *      - To add a Deadline to the list, use the following format:
+     *     deadline/description/time to be completed by
+     *
+     *      - To add an Event to the list, use the following format:
+     *      event/description/start time/end time
+     *
+     *      - To mark a task as done, use the following format:
+     *      mark/task index
+     *
+     *      - To unmark a task as done, use the following format:
+     *      unmark/task index
+     *
+     *      - To close the chatbot, use the following command:
+     *      bye
+     *
+     *</p>
      */
     public static void start() {
 
@@ -34,7 +61,7 @@ public class SirDuke {
 
         while(true) {
             String command = scanner.nextLine();
-            String regex = "[,\\.\\s]";
+            String regex = "/";
             String[] parsedCommand = command.split(regex);
             switch (parsedCommand[0]) { //first word of the command
                 case "bye":
@@ -78,8 +105,16 @@ public class SirDuke {
                         System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;
+                case "todo":
+                    list.createToDoTask(parsedCommand[1]);
+                    break;
+                case "deadline":
+                    list.createDeadlineTask(parsedCommand[1], parsedCommand[2]);
+                    break;
+                case "event":
+                    list.createEventTask(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
+                    break;
                 default:
-                    list.createTask(command);
                     break;
             }
         }

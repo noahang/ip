@@ -1,6 +1,9 @@
 package backend;
 
 import backend.Task.Task;
+import backend.Task.ToDoTask;
+import backend.Task.DeadlineTask;
+import backend.Task.EventTask;
 
 import java.util.HashMap;
 import static frontend.Format.HORIZONTAL_LINE;
@@ -13,17 +16,53 @@ public class ToDoList {
     HashMap<Integer, Task> toDoList = new HashMap<>();
 
     /**
-     * Creates a new Task and adds it to the toDoList
+     * Creates a new ToDoTask and adds it to the toDoList
      * The Key is the index of the task, which is a string
      * The Value is the task
      * Prints message to inform user that task has been added
+     * @param description name of the task
      */
-    public void createTask(String taskName){
-        Task task = new Task(taskName);
+    public void createToDoTask(String description){
+        ToDoTask toDo = new ToDoTask(description);
         int index = toDoList.size() + 1;
-        toDoList.put(index, task);
+        toDoList.put(index, toDo);
         System.out.println(HORIZONTAL_LINE + "\n"
-                + "I have added the following task to your list: "+ taskName + "\n"
+                + "I have added the following ToDo to your list: "+ description + "\n"
+                + HORIZONTAL_LINE);
+    }
+
+    /**
+     * Creates a new DeadlineTask and adds it to the toDoList
+     * The Key is the index of the task, which is a string
+     * The Value is the task
+     * Prints message to inform user that task has been added
+     * @param description name of the task
+     * @param toBeCompletedBy the time that the task must be completed by
+     */
+    public void createDeadlineTask(String description, String toBeCompletedBy){
+        Task deadline = new DeadlineTask(description, toBeCompletedBy);
+        int index = toDoList.size() + 1;
+        toDoList.put(index, deadline);
+        System.out.println(HORIZONTAL_LINE + "\n"
+                + "I have added the following Deadline to your list: "+ description + "\n"
+                + HORIZONTAL_LINE);
+    }
+
+    /**
+     * Creates a new DeadlineTask and adds it to the toDoList
+     * The Key is the index of the task, which is a string
+     * The Value is the task
+     * Prints message to inform user that task has been added
+     * @param description name of the task
+     * @param startTime the time that the event starts
+     * @param startTime the time that the event ends
+     */
+    public void createEventTask(String description, String startTime, String endTime){
+        Task event = new EventTask(description, startTime, endTime);
+        int index = toDoList.size() + 1;
+        toDoList.put(index, event);
+        System.out.println(HORIZONTAL_LINE + "\n"
+                + "I have added the following Event to your list: "+ description + "\n"
                 + HORIZONTAL_LINE);
     }
 
@@ -65,7 +104,7 @@ public class ToDoList {
      * @param index the index of the task
      * which is also the Key of the task in the <code>HashMap toDoList</code>
      */
-    public void unmarkTaskAsDone ( int index){
+    public void unmarkTaskAsDone (int index) {
         if (toDoList.get(index) == null) {
             System.out.println(HORIZONTAL_LINE + "\n");
             System.out.println("I do not have this task in my list.");

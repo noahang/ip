@@ -74,14 +74,12 @@ public class SirDuke {
                     try {
                         int index = Integer.parseInt(parsedCommand[1]);
                         list.markTaskAsDone(index);
-                    }
-                    catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
+                    } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index." +
                                 "Try the same command with an integer instead.");
                         System.out.println(HORIZONTAL_LINE + "\n");
-                    }
-                    catch (NumberFormatException e) { //index provided after "mark" is not a number
+                    } catch (NumberFormatException e) { //index provided after "mark" is not a number
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index. " +
                                 "Try the same command with an integer instead.");
@@ -92,13 +90,11 @@ public class SirDuke {
                     try {
                         int index = Integer.parseInt(parsedCommand[1]);
                         list.unmarkTaskAsDone(index);
-                    }
-                    catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
+                    } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index.");
                         System.out.println(HORIZONTAL_LINE + "\n");
-                    }
-                    catch (NumberFormatException e) { //index provided after "mark" is not a number
+                    } catch (NumberFormatException e) { //index provided after "mark" is not a number
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index. " +
                                 "Try the same command with an integer instead.");
@@ -106,15 +102,39 @@ public class SirDuke {
                     }
                     break;
                 case "todo":
-                    list.createToDoTask(parsedCommand[1]);
+                    try {
+                        list.createToDoTask(parsedCommand[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("Your todo description is incomplete. " +
+                                "Use the following format: todo/description");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
                     break;
                 case "deadline":
-                    list.createDeadlineTask(parsedCommand[1], parsedCommand[2]);
+                    try {
+                        list.createDeadlineTask(parsedCommand[1], parsedCommand[2]);
+                    } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("Your deadline description is incomplete. " +
+                                "Use the following format: deadline/description/timeToBeCompletedBy");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
                     break;
                 case "event":
-                    list.createEventTask(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
+                    try {
+                        list.createEventTask(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
+                    } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("Your event description is incomplete. " +
+                                "Use the following format: event/description/startTime/endTime");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
                     break;
                 default:
+                    System.out.println(HORIZONTAL_LINE + "\n");
+                    System.out.println("How about you try telling me to do something I can actually understand?");
+                    System.out.println(HORIZONTAL_LINE + "\n");
                     break;
             }
         }

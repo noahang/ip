@@ -27,7 +27,7 @@ public class ToDoList {
     public void showList(){
         System.out.println(HORIZONTAL_LINE + "\n");
         toDoList.forEach((key,value) ->
-                System.out.println(key.toString() + ". " + value.getTaskName() + "\n"));
+                System.out.println(key.toString() + ". " + value.toString() + "\n"));
         System.out.println(HORIZONTAL_LINE + "\n");
     }
 }

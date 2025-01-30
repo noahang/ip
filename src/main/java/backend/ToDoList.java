@@ -113,16 +113,16 @@ public class ToDoList {
         }
 
     /**
-     * Removes tasks in the list as done.
+     * Delete a task in the list.
      * If the task does not exist, informs user that the task does not exist.
      *
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
-    public void removeTask (int index) {
+    public void deleteTask (int index) {
         try {
             Task task = toDoList.remove(index);
             System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("Very well, I have removed " + task + " .");
+            System.out.println("Very well, I have deleted " + task + " .");
             System.out.println(HORIZONTAL_LINE + "\n");
         } catch (IndexOutOfBoundsException e) {
             System.out.println(HORIZONTAL_LINE + "\n");

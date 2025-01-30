@@ -43,6 +43,9 @@ public class SirDuke {
      *      - To unmark a task as done, use the following format:
      *      unmark/task index
      *
+     *      - To delete a task, use the following format:
+     *      delete/task index
+     *
      *      - To close the chatbot, use the following command:
      *      bye
      *
@@ -131,10 +134,10 @@ public class SirDuke {
                         System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;
-                case "remove":
+                case "delete":
                     try {
                         int index = Integer.parseInt(parsedCommand[1]) - 1;
-                        list.removeTask(index);
+                        list.deleteTask(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index." +

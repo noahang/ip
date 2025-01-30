@@ -13,13 +13,14 @@ public class ToDoList {
 
     /**
      * Creates a new Task and adds it to the toDoList
-     * The Key is the index of the task
+     * The Key is the index of the task, which is a string
      * The Value is the task
      * Prints message to inform user that task has been added
      */
     public void createTask(String taskName){
         Task task = new Task(taskName);
-        toDoList.put(toDoList.size() + 1, task);
+        int index = toDoList.size() + 1;
+        toDoList.put(index, task);
         System.out.println(HORIZONTAL_LINE + "\n"
                 + "I have added the following task to your list: "+ taskName + "\n"
                 + HORIZONTAL_LINE);
@@ -28,7 +29,7 @@ public class ToDoList {
     /**
      * Prints the index and string representation of every task in the toDoList
      */
-    public void showList(){
+    public void showList() {
         System.out.println(HORIZONTAL_LINE + "\n");
         toDoList.forEach((key,value) ->
                 System.out.println(key.toString() + ". " + value.toString() + "\n"));
@@ -42,13 +43,31 @@ public class ToDoList {
      * @param index the index of the task
      * which is also the Key of the task in the <code>HashMap toDoList</code>
      */
-    public void markTaskAsDone(int index){
+    public void markTaskAsDone(int index) {
         if (toDoList.get(index) == null) {
+            System.out.println(HORIZONTAL_LINE + "\n");
             System.out.println("I do not have this task in my list.");
+            System.out.println(HORIZONTAL_LINE + "\n");
         } else {
             Task task = toDoList.get(index);
             task.markAsDone();
-            System.out.println("Well done, I have marked " + task.toString() + "as done.");
+            System.out.println(HORIZONTAL_LINE + "\n");
+            System.out.println("Well done, I have marked " + task + " as done.");
+            System.out.println(HORIZONTAL_LINE + "\n");
         }
     }
-}
+
+        public void unmarkTaskAsDone ( int index){
+            if (toDoList.get(index) == null) {
+                System.out.println(HORIZONTAL_LINE + "\n");
+                System.out.println("I do not have this task in my list.");
+                System.out.println(HORIZONTAL_LINE + "\n");
+            } else {
+                Task task = toDoList.get(index);
+                task.unmarkAsDone();
+                System.out.println(HORIZONTAL_LINE + "\n");
+                System.out.println("Understood, I have unmarked " + task + " as done.");
+                System.out.println(HORIZONTAL_LINE + "\n");
+            }
+        }
+    }

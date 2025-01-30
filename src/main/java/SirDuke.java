@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import backend.ToDoList;
 import frontend.Format;
+
+import static frontend.Format.HORIZONTAL_LINE;
+
 public class SirDuke {
     
     /**
@@ -31,12 +34,48 @@ public class SirDuke {
 
         while(true) {
             String command = scanner.nextLine();
-            switch (command) {
+            String regex = "[,\\.\\s]";
+            String[] parsedCommand = command.split(regex);
+            switch (parsedCommand[0]) { //first word of the command
                 case "bye":
                     SirDuke.sayBye();
                     break;
                 case "list":
                     list.showList();
+                    break;
+                case "mark":
+                    try {
+                        int index = Integer.parseInt(parsedCommand[1]);
+                        list.markTaskAsDone(index);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index. " +
+                                "Try the same command with an integer instead.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
+                    break;
+                case "unmark":
+                    try {
+                        int index = Integer.parseInt(parsedCommand[1]);
+                        list.unmarkTaskAsDone(index);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                        System.out.println("You have not provided me with a valid task index. " +
+                                "Try the same command with an integer instead.");
+                        System.out.println(HORIZONTAL_LINE + "\n");
+                    }
                     break;
                 default:
                     list.createTask(command);

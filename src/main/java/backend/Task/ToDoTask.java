@@ -9,6 +9,8 @@ public class ToDoTask extends Task {
 
     /**
      * Constructor for a Task object
+     *
+     * @param description name of the task
      */
     public ToDoTask(String description) {
         super(description);

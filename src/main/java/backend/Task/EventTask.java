@@ -3,9 +3,9 @@ package backend.Task;
 import backend.Task.Task;
 
 /**
- * Represents an event task. A <code>EventTask<code> object has a
- * <code>description<code> String startTime that is the time that the event starts
- * <code>description<code> String endTime that is the time that the event ends
+ * Represents an event task. A <code>EventTask<code> object has
+ * a <code>description<code> String startTime that is the time that the event starts and
+ * a <code>description<code> String endTime that is the time that the event ends
  */
 public class EventTask extends Task {
 
@@ -14,7 +14,7 @@ public class EventTask extends Task {
 
     /**
      * Constructor for an Event object
-     * <p>
+     *
      * @param description name of the task
      * @param startTime time that the task starts
      * @param endTime time that the task ends

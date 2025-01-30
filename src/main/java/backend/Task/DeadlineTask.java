@@ -4,13 +4,15 @@ import backend.Task.Task;
 
 /**
  * Represents a task with a deadline. A <code>DeadlineTask<code> object has a
- * <code>description<code> String toBeCompletedBy that is the time that the task must be completed by
+ * <code>description<code> String toBeCompletedBy that is the time that the task must be completed by.
  */
 public class DeadlineTask extends Task {
 
     protected String toBeCompletedBy;
 
     /**
+     * Constructor for an Event object
+     *
      * @param description name of the task
      * @param toBeCompletedBy the time that the task must be completed by
      */

@@ -133,7 +133,7 @@ public class SirDuke {
                     break;
                 default:
                     System.out.println(HORIZONTAL_LINE + "\n");
-                    System.out.println("How about you try telling me to do something I can actually understand?");
+                    System.out.println("I'm afraid I don't understand what you mean.");
                     System.out.println(HORIZONTAL_LINE + "\n");
                     break;
             }

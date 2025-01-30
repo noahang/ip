@@ -5,7 +5,7 @@ package backend.Task;
  * a <code>description<code> String member that is the name of the task
  * a <code>isDone<code> boolean member that represents whether the task is completed or not
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 

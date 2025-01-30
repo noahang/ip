@@ -19,3 +19,6 @@ src/main/java/SirDuke.class
 src/main/java/backend/Task.class
 src/main/java/backend/ToDoList.class
 src/main/java/frontend/Format.class
+data/sirDuke.txt
+src/main/java/backend/Task/Task.class
+text-ui-test/level1input.txt

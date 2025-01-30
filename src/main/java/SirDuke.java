@@ -1,11 +1,39 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import backend.ToDoList;
 import frontend.Format;
-
 import static frontend.Format.HORIZONTAL_LINE;
 
 /**
- * Class that represents a chatbot
+ * Class that acts as the User Interface.
+ *<p>
+ *     Using the chatbot:
+ *     - To view the list, use the following command:
+ *     list
+ *
+ *      - To add a To Do to the list, use the following format:
+ *     deadline/description
+ *
+ *      - To add a Deadline to the list, use the following format:
+ *     deadline/description/time to be completed by
+ *
+ *      - To add an Event to the list, use the following format:
+ *      event/description/start time/end time
+ *
+ *      - To mark a task as done, use the following format:
+ *      mark/task index
+ *
+ *      - To unmark a task as done, use the following format:
+ *      unmark/task index
+ *
+ *      - To delete a task, use the following format:
+ *      delete/task index
+ *
+ *      - To close the chatbot, use the following command:
+ *      bye
+ *</p>
  */
 public class SirDuke {
     
@@ -20,40 +48,18 @@ public class SirDuke {
     }
 
     /**
-     * Prints welcome message and allows the SirDuke chatbot to start receiving commands
-     * Reads user input from console and interprets them as commands
-     * Executes commands accordingly
-     *<p>
-     *     Using the chatbot:
-     *     - To view the list, use the following command:
-     *     list
+     * Prints welcome message and allows the SirDuke chatbot to start receiving commands.
+     * Reads user input from console and interprets them as commands.
+     * Executes commands accordingly.
+     * Updates and saves to listFile only if a command is SUCCESSFULLY EXECUTED.
      *
-     *      - To add a To Do to the list, use the following format:
-     *     deadline/description
-     *
-     *      - To add a Deadline to the list, use the following format:
-     *     deadline/description/time to be completed by
-     *
-     *      - To add an Event to the list, use the following format:
-     *      event/description/start time/end time
-     *
-     *      - To mark a task as done, use the following format:
-     *      mark/task index
-     *
-     *      - To unmark a task as done, use the following format:
-     *      unmark/task index
-     *
-     *      - To delete a task, use the following format:
-     *      delete/task index
-     *
-     *      - To close the chatbot, use the following command:
-     *      bye
-     *
-     *</p>
+     * @param listFile the file for the contents of the ToDoList to be written into
      */
-    public static void start() {
+    public static void start(File listFile) {
 
         ToDoList list = new ToDoList();
+
+        boolean isCommandSuccessful = true;
 
         System.out.println(Format.HORIZONTAL_LINE + "\n"
                 + "It's a pleasure to meet you. My name is Sir Duke Ellington.\n"
@@ -150,17 +156,36 @@ public class SirDuke {
                         System.out.println(HORIZONTAL_LINE + "\n");
                     }
                     break;
-
                 default:
                     System.out.println(HORIZONTAL_LINE + "\n");
                     System.out.println("I'm afraid I don't understand what you mean.");
                     System.out.println(HORIZONTAL_LINE + "\n");
+                    isCommandSuccessful = false; //so that we do not write to the listFile
                     break;
+            } if (isCommandSuccessful) {
+                try {
+                    FileWriter fw = new FileWriter(listFile);
+                    fw.write(list.toString());
+                    fw.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
     public static void main(String[] args) {
-        SirDuke.start();
+        File listFile = new File("./data/sirDuke.txt"); //file that saves contents of ToDoList
+        if (listFile.exists()) {
+            SirDuke.start(listFile);
+        } else {
+            try {
+                if(listFile.createNewFile()) {
+                    SirDuke.start(listFile);
+                }
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+            }
+        }
     }
 }
 

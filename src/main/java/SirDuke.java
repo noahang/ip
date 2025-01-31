@@ -6,8 +6,6 @@ import java.util.Scanner;
 
 import backend.Task.IllegalStartAndEndDateException;
 import backend.ToDoList;
-import frontend.Format;
-import static frontend.Format.HORIZONTAL_LINE;
 
 /**
  * Class that acts as the User Interface.
@@ -39,14 +37,17 @@ import static frontend.Format.HORIZONTAL_LINE;
  *</p>
  */
 public class SirDuke {
-    
+
+    public static final String HORIZONTAL_LINE =
+            "____________________________________________________________";
+
     /**
      * Prints exit message and exits.
      */
     public static void sayBye() {
-        System.out.println(Format.HORIZONTAL_LINE + "\n"
+        System.out.println(HORIZONTAL_LINE + "\n"
                 + "Godspeed.\n"
-                + Format.HORIZONTAL_LINE);
+                + HORIZONTAL_LINE);
         System.exit(0);
     }
 
@@ -64,10 +65,10 @@ public class SirDuke {
 
         boolean isCommandSuccessful = true;
 
-        System.out.println(Format.HORIZONTAL_LINE + "\n"
+        System.out.println(HORIZONTAL_LINE + "\n"
                 + "It's a pleasure to meet you. My name is Sir Duke Ellington.\n"
                 + "What can I do you for?\n"
-                + Format.HORIZONTAL_LINE);
+                + HORIZONTAL_LINE);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -191,7 +192,7 @@ public class SirDuke {
         }
     }
     public static void main(String[] args) {
-        File listFile = new File("./data/sirDuke.txt"); //file that saves contents of ToDoList
+        File listFile = new File("../data/sirDuke.txt"); //file that saves contents of ToDoList
         if (listFile.exists()) {
             SirDuke.start(listFile);
         } else {
@@ -200,7 +201,7 @@ public class SirDuke {
                     SirDuke.start(listFile);
                 }
             } catch (IOException e) {
-                System.out.println("An error occurred.");
+                System.out.println(e);
             }
         }
     }

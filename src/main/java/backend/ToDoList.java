@@ -6,7 +6,6 @@ import backend.Task.DeadlineTask;
 import backend.Task.EventTask;
 
 import java.util.ArrayList;
-import static frontend.Format.HORIZONTAL_LINE;
 
 /**
  * Represents a list that serves as the database for the tasks.
@@ -14,7 +13,10 @@ import static frontend.Format.HORIZONTAL_LINE;
  * Index starts from O, but will be printed as starting from 1 in showList().
  */
 public class ToDoList {
-    ArrayList<Task> toDoList = new ArrayList();
+
+    public static final String HORIZONTAL_LINE =
+            "____________________________________________________________";
+    ArrayList<Task> toDoList = new ArrayList<>();
 
     /**
      * Creates a new ToDoTask and adds it to the toDoList.

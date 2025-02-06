@@ -1,5 +1,5 @@
 package backend.task;
-import backend.IllegalStartAndEndDateException;
+import backend.exceptions.IllegalStartAndEndDateException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +33,17 @@ public class EventTask extends Task {
         if (this.startTime.isAfter(this.endTime)) {
             throw new IllegalStartAndEndDateException(this.startTime, this.endTime);
         }
+    }
+
+    /**
+     * Creates an entry to a file from an Event.
+     * @return string representing the Event
+     */
+
+    @Override
+    public String toFileEntry() {
+        return "E|" + getStatusIcon() + "|" + description + "|"
+                + startTime + "|" + endTime;
     }
 
     @Override

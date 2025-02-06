@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import backend.Task.IllegalStartAndEndDateException;
 import backend.ToDoList;
-
+import backend.Storage;
 /**
  * Class that acts as the User Interface.
  *<p>
@@ -41,6 +41,9 @@ public class SirDuke {
     public static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
+    private Storage storage;
+    private ToDoList taskList;
+
     /**
      * Prints exit message and exits.
      */
@@ -61,7 +64,7 @@ public class SirDuke {
      */
     public static void start(File listFile) {
 
-        ToDoList list = new ToDoList();
+        ToDoList taskList = new ToDoList();
 
         boolean isCommandSuccessful = true;
 
@@ -81,12 +84,12 @@ public class SirDuke {
                     SirDuke.sayBye();
                     break;
                 case "list":
-                    list.showList();
+                    taskList.showList();
                     break;
                 case "mark":
                     try {
                         int index = Integer.parseInt(parsedCommand[1]) - 1;
-                        list.markTaskAsDone(index);
+                        taskList.markTaskAsDone(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index." +
@@ -102,7 +105,7 @@ public class SirDuke {
                 case "unmark":
                     try {
                         int index = Integer.parseInt(parsedCommand[1]) - 1;
-                        list.unmarkTaskAsDone(index);
+                        taskList.unmarkTaskAsDone(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index.");
@@ -116,7 +119,7 @@ public class SirDuke {
                     break;
                 case "todo":
                     try {
-                        list.createToDoTask(parsedCommand[1]);
+                        taskList.createToDoTask(parsedCommand[1]);
                     } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("Your todo description is incomplete. " +
@@ -126,7 +129,7 @@ public class SirDuke {
                     break;
                 case "deadline":
                     try {
-                        list.createDeadlineTask(parsedCommand[1], parsedCommand[2]);
+                        taskList.createDeadlineTask(parsedCommand[1], parsedCommand[2]);
                     } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("Your deadline description is incomplete. " +
@@ -141,7 +144,7 @@ public class SirDuke {
                     break;
                 case "event":
                     try {
-                        list.createEventTask(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
+                        taskList.createEventTask(parsedCommand[1], parsedCommand[2], parsedCommand[3]);
                     } catch (ArrayIndexOutOfBoundsException e) { //incomplete deadline description
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("Your event description is incomplete. " +
@@ -161,7 +164,7 @@ public class SirDuke {
                 case "delete":
                     try {
                         int index = Integer.parseInt(parsedCommand[1]) - 1;
-                        list.deleteTask(index);
+                        taskList.deleteTask(index);
                     } catch (ArrayIndexOutOfBoundsException e) { //no index provided after "mark"
                         System.out.println(HORIZONTAL_LINE + "\n");
                         System.out.println("You have not provided me with a valid task index." +
@@ -183,7 +186,7 @@ public class SirDuke {
             } if (isCommandSuccessful) {
                 try {
                     FileWriter fw = new FileWriter(listFile);
-                    fw.write(list.toString());
+                    fw.write(taskList.toString());
                     fw.close();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -192,18 +195,8 @@ public class SirDuke {
         }
     }
     public static void main(String[] args) {
-        File listFile = new File("../data/sirDuke.txt"); //file that saves contents of ToDoList
-        if (listFile.exists()) {
-            SirDuke.start(listFile);
-        } else {
-            try {
-                if(listFile.createNewFile()) {
-                    SirDuke.start(listFile);
-                }
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
+
+
     }
 }
 

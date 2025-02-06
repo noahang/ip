@@ -21,6 +21,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract String toFileEntry();
+
     @Override
     public String toString() {
         return (isDone

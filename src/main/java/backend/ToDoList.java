@@ -120,7 +120,7 @@ public class ToDoList {
      *
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
-    public void deleteTask (int index) {
+    public void deleteTask(int index) {
         try {
             Task task = toDoList.remove(index);
             System.out.println(HORIZONTAL_LINE + "\n");
@@ -131,6 +131,14 @@ public class ToDoList {
             System.out.println("I do not have this task in my list.");
             System.out.println(HORIZONTAL_LINE + "\n");
         }
+    }
+
+    public Task getTask(int index) {
+        return toDoList.get(index);
+    }
+
+    public int getLength() {
+        return this.toDoList.size();
     }
 
     @Override public String toString() {

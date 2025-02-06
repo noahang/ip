@@ -1,4 +1,4 @@
-package backend.Task;
+package backend.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

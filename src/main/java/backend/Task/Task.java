@@ -1,4 +1,4 @@
-package backend.Task;
+package backend.task;
 
 /**
  * Represents a task. A <code>Task<code> object has

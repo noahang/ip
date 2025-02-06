@@ -1,6 +1,4 @@
-package backend.Task;
-
-import backend.Task.Task;
+package backend.task;
 
 /**
  * Represents a task without a start date or a deadline.

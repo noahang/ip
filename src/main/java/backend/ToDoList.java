@@ -1,9 +1,9 @@
 package backend;
 
-import backend.Task.Task;
-import backend.Task.ToDoTask;
-import backend.Task.DeadlineTask;
-import backend.Task.EventTask;
+import backend.task.Task;
+import backend.task.ToDoTask;
+import backend.task.DeadlineTask;
+import backend.task.EventTask;
 
 import java.util.ArrayList;
 

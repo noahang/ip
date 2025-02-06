@@ -26,20 +26,20 @@ public class Storage {
      * Otherwise, a new parent directory will be created for the file
      * and the file will be created andwritten to.
      *
-     * @param list the ToDoList containing the tasks to be written to the file
+     * @param taskList the ToDoList containing the tasks to be written to the file
      */
     // @@author testing1234567891011121314
     // Reused from https://github.com/testing1234567891011121314/ip
     // with minor modifications
-    public void saveDataToDisk(ToDoList list) {
+    public void saveDataToDisk(ToDoList taskList) {
         try {
             File file = new File(filePath);
             File dir = new File(file.getParent());
             boolean dirCreated = dir.mkdirs();
             FileWriter fw = new FileWriter(filePath, false);
             BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < list.getLength(); i++) {
-                bw.write(list.getTask(i).toFileEntry());
+            for (int i = 0; i < taskList.getLength(); i++) {
+                bw.write(taskList.getTask(i).toFileEntry());
                 bw.newLine();
             }
             bw.close();

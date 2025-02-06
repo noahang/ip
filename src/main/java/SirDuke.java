@@ -44,6 +44,9 @@ public class SirDuke {
     private Storage storage;
     private ToDoList taskList;
 
+    /**
+     * Creates new SirDuke chatbot class
+     */
     public SirDuke() {
         this.storage = new Storage("./data/SirDuke.txt");
         this.taskList = new ToDoList();
@@ -52,7 +55,7 @@ public class SirDuke {
     /**
      * Prints exit message and exits.
      */
-    public static void sayBye() {
+    public void sayBye() {
         System.out.println(HORIZONTAL_LINE + "\n"
                 + "Godspeed.\n"
                 + HORIZONTAL_LINE);
@@ -64,10 +67,8 @@ public class SirDuke {
      * Reads user input from console and interprets them as commands.
      * Executes commands accordingly.
      * Updates and saves to listFile only if a command is SUCCESSFULLY EXECUTED.
-     *
-     * @param listFile the file for the contents of the ToDoList to be written into
      */
-    public static void start(File listFile) {
+    public void start() {
 
         ToDoList taskList = new ToDoList();
 
@@ -86,7 +87,7 @@ public class SirDuke {
             String[] parsedCommand = command.split(regex);
             switch (parsedCommand[0]) { //first word of the command
                 case "bye":
-                    SirDuke.sayBye();
+                    sayBye();
                     break;
                 case "list":
                     taskList.showList();
@@ -186,22 +187,13 @@ public class SirDuke {
                     System.out.println(HORIZONTAL_LINE + "\n");
                     System.out.println("I'm afraid I don't understand what you mean.");
                     System.out.println(HORIZONTAL_LINE + "\n");
-                    isCommandSuccessful = false; //so that we do not write to the listFile
                     break;
-            } if (isCommandSuccessful) {
-                try {
-                    FileWriter fw = new FileWriter(listFile);
-                    fw.write(taskList.toString());
-                    fw.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
             }
         }
     }
     public static void main(String[] args) {
-
-
+        SirDuke sirDuke = new SirDuke();
+        sirDuke.start();
     }
 }
 

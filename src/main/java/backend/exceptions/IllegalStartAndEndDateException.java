@@ -9,7 +9,7 @@ public class IllegalStartAndEndDateException extends IllegalArgumentException {
 
     LocalDate startTime;
     LocalDate endTime;
-    IllegalStartAndEndDateException(LocalDate startTime, LocalDate endTime) {
+    public IllegalStartAndEndDateException(LocalDate startTime, LocalDate endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }

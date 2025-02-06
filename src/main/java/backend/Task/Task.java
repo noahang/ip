@@ -23,11 +23,13 @@ public abstract class Task {
 
     public abstract String toFileEntry();
 
-    @Override
-    public String toString() {
-        return (isDone
-                ? "[X] " + this.description
-                : "[ ] " + this.description);
+    /**
+     * @return "X" if done, to show that task has been marked as done and " " otherwise
+     * */
+    public String getStatusIcon() {
+        return isDone
+                ? "X"
+                : " ";
     }
 
     /**

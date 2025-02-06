@@ -10,6 +10,10 @@ public class Storage {
 
     String filePath;
 
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
     public void saveDataToDisk(ToDoList list) {
         try {
             File file = new File(filePath);

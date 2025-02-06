@@ -44,6 +44,11 @@ public class SirDuke {
     private Storage storage;
     private ToDoList taskList;
 
+    public SirDuke() {
+        this.storage = new Storage("./data/SirDuke.txt");
+        this.taskList = new ToDoList();
+    }
+
     /**
      * Prints exit message and exits.
      */

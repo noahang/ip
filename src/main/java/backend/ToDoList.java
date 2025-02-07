@@ -1,10 +1,12 @@
 package backend;
 
+import backend.exceptions.IllegalStartAndEndDateException;
 import backend.task.Task;
 import backend.task.ToDoTask;
 import backend.task.DeadlineTask;
 import backend.task.EventTask;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -24,12 +26,9 @@ public class ToDoList {
      *
      * @param description name of the task
      */
-    public void createToDoTask(String description){
+    public void createToDoTask(String description) {
         ToDoTask toDo = new ToDoTask(description);
         toDoList.add(toDo);
-        System.out.println(HORIZONTAL_LINE + "\n"
-                + "I have added the following ToDo to your list: "+ description + "\n"
-                + HORIZONTAL_LINE);
     }
 
     /**
@@ -39,12 +38,10 @@ public class ToDoList {
      * @param description name of the task
      * @param toBeCompletedBy the time that the task must be completed by
      */
-    public void createDeadlineTask(String description, String toBeCompletedBy){
+    public void createDeadlineTask(String description, String toBeCompletedBy)
+            throws DateTimeParseException {
         Task deadline = new DeadlineTask(description, toBeCompletedBy);
         toDoList.add(deadline);
-        System.out.println(HORIZONTAL_LINE + "\n"
-                + "I have added the following Deadline to your list: "+ description + "\n"
-                + HORIZONTAL_LINE);
     }
 
     /**
@@ -53,9 +50,10 @@ public class ToDoList {
      *
      * @param description name of the task
      * @param startTime the time that the event starts
-     * @param startTime the time that the event ends
+     * @param endTime the time that the event ends
      */
-    public void createEventTask(String description, String startTime, String endTime){
+    public void createEventTask(String description, String startTime, String endTime)
+            throws DateTimeParseException, IllegalStartAndEndDateException {
         Task event = new EventTask(description, startTime, endTime);
         toDoList.add(event);
         System.out.println(HORIZONTAL_LINE + "\n"
@@ -80,18 +78,12 @@ public class ToDoList {
      *
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
-    public void markTaskAsDone(int index) {
-        try {
-            Task task = toDoList.get(index);
-            task.markAsDone();
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("Well done, I have marked " + task + " as done.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("I do not have this task in my list.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        }
+    public void markTaskAsDone(int index) throws IndexOutOfBoundsException {
+        Task task = toDoList.get(index);
+        task.markAsDone();
+        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println("Well done, I have marked " + task + " as done.");
+        System.out.println(HORIZONTAL_LINE + "\n");
     }
 
     /**
@@ -100,19 +92,13 @@ public class ToDoList {
      *
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
-    public void unmarkTaskAsDone (int index) {
-        try {
-            Task task = toDoList.get(index);
-            task.unmarkAsDone();
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("Understood, I have unmarked " + task + " as done.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("I do not have this task in my list.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-            }
-        }
+    public void unmarkTaskAsDone (int index) throws IndexOutOfBoundsException {
+        Task task = toDoList.get(index);
+        task.unmarkAsDone();
+        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println("Understood, I have unmarked " + task + " as done.");
+        System.out.println(HORIZONTAL_LINE + "\n");
+    }
 
     /**
      * Delete a task in the list.
@@ -120,17 +106,11 @@ public class ToDoList {
      *
      * @param index the index of the task in the <code>ArrayList toDoList</code>
      */
-    public void deleteTask(int index) {
-        try {
-            Task task = toDoList.remove(index);
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("Very well, I have deleted " + task + " .");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(HORIZONTAL_LINE + "\n");
-            System.out.println("I do not have this task in my list.");
-            System.out.println(HORIZONTAL_LINE + "\n");
-        }
+    public void deleteTask(int index) throws IndexOutOfBoundsException {
+        Task task = toDoList.remove(index);
+        System.out.println(HORIZONTAL_LINE + "\n");
+        System.out.println("Very well, I have deleted " + task + " .");
+        System.out.println(HORIZONTAL_LINE + "\n");
     }
 
     public Task getTask(int index) {
